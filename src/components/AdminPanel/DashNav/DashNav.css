@@ -1,0 +1,26 @@
+.dash-nav__link{
+    position: relative;
+    display: block;
+    padding: 1.5rem 1rem 1.5rem 4rem;
+    color: #4fc1ee;
+}
+.dash-nav__link.active{
+    background:#1a222f;
+}
+.dash-nav__link.active:before{
+    content:'';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border: 8px solid transparent;
+    border-left-color: #4fc1ee;
+    border-top-width: 12px;
+    border-bottom-width: 12px;
+    transform: translateY(-50%);
+}
+.dash-nav__link:hover{
+    background: #2d394a;
+}
+.dash-nav__link-icon{
+    margin-right: 1rem !important;
+}
