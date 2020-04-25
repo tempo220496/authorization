@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Grid, GridRow, GridColumn, Icon, Search, Dropdown, Image } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../store/actions/authAction";
 import styled from "styled-components";
+import { DashBoardContext } from "../../../containers/Dashboard/Dashboard";
 
 const Header = styled.header`
   padding: 2rem 2rem 2rem 0;
@@ -21,8 +22,9 @@ const options=[
     {key:'sign-out',text:'Sign Out',icon:'sign out'}
 ];
 
-const DashHeader = ({ history }) => {
+const DashHeader = () => {
   const dispatch = useDispatch();
+  const {history,setShow}=useContext(DashBoardContext);
   const onLogout = () => {
     dispatch(logout(history));
   };
@@ -36,6 +38,8 @@ const DashHeader = ({ history }) => {
               color="blue"
               size="large"
               className="dashboard__toggle"
+              onClick={()=>setShow(true)}
+              style={{cursor:'pointer'}}
             />
           </GridColumn>
           <GridColumn tablet={10}>

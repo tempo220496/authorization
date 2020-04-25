@@ -4,5 +4,15 @@
     background: #edf3fb;
 }
 .dash-main{
-    flex: 1 0 auto;
+    width: 100%;
+    position: relative;
+}
+.dash-main_disabled:after{
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,.8);
 }
