@@ -7,14 +7,16 @@ const Login = ({history}) => {
     const [email,setUsername]=useState('');
     const [password,setPassword]=useState(''); 
     const {isAuth,loading}=useSelector(state=>(state.auth));
+
     const dispatch=useDispatch();
+    
     const onSubmit=e=>{
         e.preventDefault();
         dispatch(userAuth(email,password));
     };
 
     useEffect(()=>{
-      if(isAuth) history.push('/dashboard');
+      if(isAuth) history.push(history.location.from.state.pathname);
     },[isAuth,history]);
 
     if(loading){

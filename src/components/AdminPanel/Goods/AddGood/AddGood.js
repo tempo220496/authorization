@@ -1,33 +1,48 @@
 import React from 'react';
-import { Form, Checkbox, Button } from 'semantic-ui-react';
+import { Form, Button, TextArea } from 'semantic-ui-react';
 import { useState } from 'react';
-import { firestore } from '../../../../config/fbConfig';
+import { useDispatch } from 'react-redux';
+import { addGood } from '../../../../store/actions/goodsAction';
 
-const AddGood = () => {
-    const [title,setTitle]=useState('');
-    const [price,setPrice]=useState('');
+const AddGood = ({history}) => {
+    const [value,setValue]=useState({
+        title:'',
+        price:'',
+        description:''
+    });
+    const dispatch=useDispatch();
+    const onChangeHandler=e=>{
+        const name=e.target.name;
+        const value=e.target.value;
+        setValue(prev=>{
+            return{
+                ...prev,
+                [name]:value
+            }
+        })
+    };
     const onSubmitHandler=e=>{
         e.preventDefault();
-        firestore.collection('goods').add({
-            title,
-            price:parseInt(price,10)
-        })
-            .then(docRef=>{
-                console.log("Document written with ID: ",docRef.id);
-            })
-            .catch(error=>{
-                console.log("Error adding document: ",error);
-            });
+        const good={
+            title:value.title,
+            price:parseInt(value.price,10),
+            description:value.description
+        };
+        dispatch(addGood(good,history))
     }
     return (
         <Form onSubmit={onSubmitHandler}>
             <Form.Field>
               <label>Title</label>
-              <input placeholder='Name of good' name="title" value={title} onChange={(e)=>setTitle(e.target.value)} />
+              <input placeholder='Name of good' name="title" onChange={onChangeHandler} />
             </Form.Field>
             <Form.Field>
               <label>Price</label>
-              <input placeholder='Price of good' type="number" name="price" value={price} onChange={(e)=>setPrice(e.target.value)} />
+              <input placeholder='Price of good' type="number" name="price" onChange={onChangeHandler} />
+            </Form.Field>
+            <Form.Field>
+                <label>Description</label>
+                <TextArea placeholder='Description of good' name="description" onChange={onChangeHandler} />
             </Form.Field>
             <Button type='submit'>Submit</Button>
         </Form>
