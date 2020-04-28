@@ -1,0 +1,17 @@
+.dashboard__module{
+    background: #fff;
+    border-bottom: 1px solid #e4ebf1;
+    margin-bottom: 2rem;
+}
+.module__header{
+    padding: 1rem 2rem;
+    background: #f9fafb;
+    border-bottom: 1px solid #e4ebf1;
+}
+.module__title{
+    color: #4d5664;
+    text-transform: uppercase;
+}
+.module__body{
+    padding: 2rem;
+}

@@ -28,7 +28,7 @@ const Dashboard = ({history}) => {
                     <Route exact path="/dashboard/analytics" component={Analytics} />
                     <Route exact path="/dashboard/sells" component={Sells} />
                     <Route exact path="/dashboard/goods" component={Goods} />
-                    <Route exact path="/dashboard/goods/add_good" component={AddGood} />
+                    <Route exact path="/dashboard/goods/add-good" component={AddGood} />
                     <Route exact path="/dashboard/goods/:id" component={GoodItem} />
                 </Switch>
             </DashMain>

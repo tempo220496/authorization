@@ -1,0 +1,7 @@
+.goods__header{
+    display: flex;
+    margin-bottom: 2rem;
+}
+.goods__add-link{
+    margin-left: auto !important;
+}

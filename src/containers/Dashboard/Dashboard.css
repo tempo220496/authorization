@@ -16,3 +16,6 @@
     height: 100%;
     background: rgba(255,255,255,.8);
 }
+.dashboard-info{
+    padding: 2rem 1.5rem;
+}

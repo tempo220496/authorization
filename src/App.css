@@ -7,3 +7,6 @@ html,body{
 #root{
     height: 100%;
 }
+.responsive-table{
+    overflow-x:auto;
+}
