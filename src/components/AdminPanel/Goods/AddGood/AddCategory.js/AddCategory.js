@@ -2,7 +2,8 @@ import React from 'react';
 import { Form, Button } from 'semantic-ui-react';
 import { useRef } from 'react';
 import { useState } from 'react';
-import { storage } from '../../../../../config/fbConfig';
+import { useDispatch } from 'react-redux';
+import { categoryAdded } from '../../../../../store/actions/goodsAction';
 
 const AddCategory = () => {
     const fileInputRef=useRef();
@@ -11,6 +12,8 @@ const AddCategory = () => {
         description:'',
     });
     const [images,setImages]=useState([]);
+    const dispatch=useDispatch();
+
     const onChangeHandler=e=>{
         const {name,value}=e.target;
         setValue(prev=>{
@@ -27,25 +30,9 @@ const AddCategory = () => {
             setImages(prev=>[...prev,file])
         }
     };
-    const onFileUploadHandler=file=>{
-        const storageRef=storage.ref(`category/${new Date().getTime()+file.name}`);
-        const uploadTask=storageRef.put(file);
-        uploadTask.on('state_changed',
-            (snapshot)=>{console.log('uploading...')},
-            (error)=>{console.log(error)},
-            ()=>{
-                uploadTask.snapshot.ref.getDownloadURL()
-                    .then(fileUrl=>{
-                        console.log(fileUrl);
-                    })
-            }
-        );
-    };
     const onSubmitHandler=e=>{
         e.preventDefault();
-        images.forEach(image=>{
-            onFileUploadHandler(image);
-        });
+        dispatch(categoryAdded(images));
     };
     return (
         <Form onSubmit={onSubmitHandler} >
